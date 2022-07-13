@@ -69,6 +69,7 @@ function App() {
     }
   }
 
+
   const removeAnswer = (qIndex,aIndex)=>{
     const values = {...inputFields}
     if(values.questions[qIndex].answers.length === 1){
@@ -138,10 +139,17 @@ function App() {
         values[e.target.name] = e.target.value
     }
     setInputFields(values)
-    console.log(values)
   }
 
-
+  const addScore = () =>{
+    const values = [...scores]
+    setScores([...scores,{
+      min:'',
+      max:'',
+      result:{en:'',ar:''},
+      description:{en:'',ar:''}
+    }])
+  }
 
   //   const handleSubmit = (e) =>{
   //   e.preventDefault();
@@ -167,6 +175,7 @@ function App() {
 
   return (
     <Form id='testForm' className='px-4 my-3' >
+        <h3>Fill the form to add your test</h3>
         <>
         <FormGroup>
           <Row className='my-2'>
@@ -277,7 +286,53 @@ function App() {
         ))
         }
         </FormGroup>
+        <h3>Please enter the test scores</h3>
         <FormGroup >
+          {scores.map((score,index)=>(
+            <div key={index} className='border p-4 rounded border-2 border-dark my-3' >
+              <Row className='my-2'>
+                <Col sm={12} md={2}>
+                  <Label className='mt-2'>Minimum Score</Label>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required  placeholder='min score' type='number' name='min'/>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required   placeholder='max score' type='number' name='max'/>
+                </Col>
+              </Row>
+              <Row className='my-2'>
+                <Col sm={12} md={1}>
+                  <Label className='mt-2'>Result in Arabic</Label>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required  placeholder='result-ar' type='text' name='result-ar'  />
+                </Col>
+                <Col sm={12} md={1}>
+                  <Label className='mt-2'>Result in English</Label>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required  placeholder='result-en' type='text' name='result-en'  />
+                </Col>
+              </Row>
+              <Row className='my-2'>
+                <Col sm={12} md={1}>
+                  <Label className='mt-2'>Description in Arabic</Label>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required  placeholder='description-ar' type='text' name='description-ar'  />
+                </Col>
+                <Col sm={12} md={1}>
+                  <Label className='mt-2'>Description in English</Label>
+                </Col>
+                <Col sm={12} md={5}>
+                  <Input required  placeholder='description-en' type='text' name='description-en'  />
+                </Col>
+              </Row>
+            </div>
+          ))}
+          <Button  className='mt-3 mx-2 btn-success' onClick={()=>{addScore()}} >Add new score<FaPlus/></Button>
+          <Button className='mt-3 mx-2 btn-danger'  >Delete score<FaTrash/></Button>
         </FormGroup>
         </>
       <Button type='submit'>Submit <FaPaperPlane/></Button>
