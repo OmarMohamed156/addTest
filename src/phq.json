@@ -1,0 +1,103 @@
+{
+	"title": {
+      "en": "This is a questionnaire title",
+      "ar": "هذا هو اسم الاختبار"
+    },
+    "category": "62bf899916bcf6d1f239162d",
+    "description": {
+      "en": "A Simple test description",
+      "ar": "وصف صغير للاختبار"
+    },
+    "rules": {
+      "en": "Answer the following questions by saying how much it applies to you\n0 - not at all\n1 - some of the time\n2 - most of the time\n3 - all the time",
+      "ar": "أجب عن الأسألة التالية"
+    },
+    "questions": [
+      {
+        "body": {
+          "en": "Do You Love JavaScript",
+          "ar": "هل تحب جافاسكريبت"
+        },
+        "answers": [
+          {
+            "body": {
+              "en": "0",
+              "ar": "0"
+            },
+            "weight": 0
+          },
+          {
+            "body": {
+              "en": "1",
+              "ar": "1"
+            },
+            "weight": 2
+          },
+          {
+            "body": {
+              "en": "2",
+              "ar": "2"
+            },
+            "weight": 4
+          },
+          {
+            "body": {
+              "en": "3",
+              "ar": "3"
+            },
+            "weight": 6
+          }
+        ]
+      }
+    ],
+    "scores": [
+      {
+        "min": 0,
+        "max": 0,
+        "result": {
+          "en": "No Sign of mental illness",
+          "ar": "لا يوجد علامات مرض نفسي"
+        },
+        "description": {
+          "en": "You are a normal person that hates JavaScript",
+          "ar": "أنت شخص طبيعي كونك تكره جافا سكريبت"
+        }
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "result": {
+          "en": "Don't Worry too much",
+          "ar": "لا تبالغ في القلق"
+        },
+        "description": {
+          "en": "You are in an early stage of the disease, don't worry. With practice you can still hate JavaScript like normal people",
+          "ar": "أنت في بداية مرحلة المرض، لا تقلق. مع التدريب، يمكنك كره هذه اللغة مجددًا كالناس الطبيعية"
+        }
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "result": {
+          "en": "Panic!",
+          "ar": "عليك أن تقلق"
+        },
+        "description": {
+          "en": "You have to seek medical attention, set with a friend, or stay away from your computer for a while",
+          "ar": "عليك الاستعانة بخبرة طبية، اجلس مع صديق أو قم بالابتعاد عن جهاز الكمبيوتر لمدة"
+        }
+      },
+      {
+        "min": 6,
+        "max": 6,
+        "result": {
+          "en": "Psychopath",
+          "ar": "مختل عقليًا"
+        },
+        "description": {
+          "en": "You're a complete psychopath, with no social life, probably no body loves you, and you'll probably die alone",
+          "ar": "أنت مختل عقليًا. وغالبًا ليس لديك حياه اجتماعية. وغالبًا لا أحد يحبك. وسوف تموت وحيدًا"
+        }
+      }
+    ]
+}
