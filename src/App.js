@@ -142,13 +142,23 @@ function App() {
   }
 
   const addScore = () =>{
-    const values = [...scores]
     setScores([...scores,{
       min:'',
       max:'',
       result:{en:'',ar:''},
       description:{en:'',ar:''}
     }])
+  }
+
+  const removeScore = (sIndex) =>{
+    const values =[...scores]
+    if(values.length === 1){
+      return
+    }
+    else{
+      values.splice(sIndex,1)
+      setScores(values)
+    }
   }
 
   //   const handleSubmit = (e) =>{
@@ -329,10 +339,10 @@ function App() {
                   <Input required  placeholder='description-en' type='text' name='description-en'  />
                 </Col>
               </Row>
+              <Button  className='mt-3 mx-2 btn-success' onClick={()=>{addScore()}} >Add new score<FaPlus/></Button>
+              <Button className='mt-3 mx-2 btn-danger'  onClick={()=>{removeScore(index)}} >Delete score<FaTrash/></Button>
             </div>
           ))}
-          <Button  className='mt-3 mx-2 btn-success' onClick={()=>{addScore()}} >Add new score<FaPlus/></Button>
-          <Button className='mt-3 mx-2 btn-danger'  >Delete score<FaTrash/></Button>
         </FormGroup>
         </>
       <Button type='submit'>Submit <FaPaperPlane/></Button>
