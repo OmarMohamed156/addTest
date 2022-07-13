@@ -94,7 +94,6 @@ function App() {
         values.questions[qIndex][e.target.name] = e.target.value
     }
     setInputFields(values)
-    console.log(inputFields)
   }
 
   const handleAnswerChange =(qIndex,aIndex,e)=>{
@@ -110,7 +109,6 @@ function App() {
         values.questions[qIndex].answers[aIndex][e.target.name] = e.target.value
     }
     setInputFields(values)
-    console.log(inputFields)
   }
 
 
@@ -157,30 +155,36 @@ function App() {
     }
     else{
       values.splice(sIndex,1)
-      setScores(values)
     }
   }
 
-  //   const handleSubmit = (e) =>{
-  //   e.preventDefault();
-  //   let test ={}
-  //   test.title = inputFields[0].title
-  //   test.category = inputFields[0].category
-  //   test.description = inputFields[0].description
-  //   test.rules = inputFields[0].rules
-  //   // for(let i = 0; i< questions.length ;i++){
-  //   //   questions[i].answers = 'hello'
-  //   //   console.log(inputFields[i])
-  //   // }
-  //   console.log(inputFields)
-  //   console.log(questions)
-  //   console.log(answers)
-  //   // console.log(questions)
-  //   // test.questions = questions
-  //   // console.log(test)
-  //   // const form = document.getElementById('testForm')
-  //   // form.reset()
-  // }
+  const handleScoreChange=(sIndex,e)=>{
+    const values = [...scores]
+    switch (e.target.name){
+      case 'result-ar':
+        values[sIndex].result.ar = e.target.value
+        break
+      case 'result-en':
+        values[sIndex].result.en = e.target.value
+        break
+      case 'description-ar':
+        values[sIndex].description.ar = e.target.value
+        break
+      case 'description-en':
+        values[sIndex].description.en = e.target.value
+        break
+      default:
+        values[sIndex][e.target.name] = e.target.value
+    }
+    setScores(values)
+  }
+
+    const handleSubmit = (e) =>{
+    e.preventDefault();
+    let test ={...inputFields}
+    test.scores = scores
+    console.log(test)
+  }
 
 
   return (
@@ -304,11 +308,14 @@ function App() {
                 <Col sm={12} md={2}>
                   <Label className='mt-2'>Minimum Score</Label>
                 </Col>
-                <Col sm={12} md={5}>
-                  <Input required  placeholder='min score' type='number' name='min'/>
+                <Col sm={12} md={4}>
+                  <Input required onChange={e => {handleScoreChange(index,e)}}  placeholder='min score' type='number' name='min'/>
                 </Col>
-                <Col sm={12} md={5}>
-                  <Input required   placeholder='max score' type='number' name='max'/>
+                <Col sm={12} md={2}>
+                  <Label className='mt-2'>Maximum Score</Label>
+                </Col>
+                <Col sm={12} md={4}>
+                  <Input required  onChange={e => {handleScoreChange(index,e)}} placeholder='max score' type='number' name='max'/>
                 </Col>
               </Row>
               <Row className='my-2'>
@@ -316,13 +323,13 @@ function App() {
                   <Label className='mt-2'>Result in Arabic</Label>
                 </Col>
                 <Col sm={12} md={5}>
-                  <Input required  placeholder='result-ar' type='text' name='result-ar'  />
+                  <Input required  onChange={e => {handleScoreChange(index,e)}} placeholder='result-ar' type='text' name='result-ar'  />
                 </Col>
                 <Col sm={12} md={1}>
                   <Label className='mt-2'>Result in English</Label>
                 </Col>
                 <Col sm={12} md={5}>
-                  <Input required  placeholder='result-en' type='text' name='result-en'  />
+                  <Input required onChange={e => {handleScoreChange(index,e)}} placeholder='result-en' type='text' name='result-en'  />
                 </Col>
               </Row>
               <Row className='my-2'>
@@ -330,13 +337,13 @@ function App() {
                   <Label className='mt-2'>Description in Arabic</Label>
                 </Col>
                 <Col sm={12} md={5}>
-                  <Input required  placeholder='description-ar' type='text' name='description-ar'  />
+                  <Input required onChange={e => {handleScoreChange(index,e)}}  placeholder='description-ar' type='text' name='description-ar'  />
                 </Col>
                 <Col sm={12} md={1}>
                   <Label className='mt-2'>Description in English</Label>
                 </Col>
                 <Col sm={12} md={5}>
-                  <Input required  placeholder='description-en' type='text' name='description-en'  />
+                  <Input required onChange={e => {handleScoreChange(index,e)}} placeholder='description-en' type='text' name='description-en'  />
                 </Col>
               </Row>
               <Button  className='mt-3 mx-2 btn-success' onClick={()=>{addScore()}} >Add new score<FaPlus/></Button>
@@ -345,7 +352,7 @@ function App() {
           ))}
         </FormGroup>
         </>
-      <Button type='submit'>Submit <FaPaperPlane/></Button>
+      <Button type='submit' onClick={handleSubmit}>Submit <FaPaperPlane/></Button>
     </Form>
   );
 }
