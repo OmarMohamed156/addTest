@@ -10,7 +10,7 @@ function App() {
       description: {ar:'',en:''},
       title: {ar:'',en:''},
       category:'',
-      rules:'',
+      rules:{ar:'',en:''},
     }])
 
   const [questions,setQuestions] = useState([
@@ -129,10 +129,18 @@ function App() {
           </Row>
           <Row className='my-2'>
             <Col sm={12} md={1}>
-              <Label className='mt-2'>Rules</Label>
+              <Label className='mt-2'>Rules in Arabic</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input  onChange={e=>{handleInputFieldChange(index,e)}} type='text' name='rules' placeholder='rules'  />
+              <Input  onChange={e=>{handleInputFieldChange(index,e)}} type='textarea' name='rules-ar' placeholder='rules-ar'  />
+            </Col>
+          </Row>
+          <Row className='my-2'>
+            <Col sm={12} md={1}>
+              <Label className='mt-2'>Rules in English</Label>
+            </Col>
+            <Col sm={12} md={11}>
+              <Input  onChange={e=>{handleInputFieldChange(index,e)}} type='textarea' name='rules-en' placeholder='rules-en'  />
             </Col>
           </Row>
         </FormGroup>
