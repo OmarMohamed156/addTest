@@ -80,39 +80,40 @@ function App() {
     }
   }
 
-  // const handleChangeQuestion =(index,e)=>{
-  //   const values = [...questions]
-  //   switch (e.target.name){
-  //     case 'body-ar':
-  //       values[index].body.ar = e.target.value
-  //       break
-  //     case 'body-en':
-  //       values[index].body.en = e.target.value
-  //       break
-  //     default:
-  //       values[index][e.target.name] = e.target.value
-  //   }
-  //   setQuestions(values)
-  // }
+  const handleChangeQuestion =(qIndex,e)=>{
+    const values = {...inputFields}
+    switch (e.target.name){
+      case 'body-ar':
+        values.questions[qIndex].body.ar = e.target.value
+        break
+      case 'body-en':
+        values.questions[qIndex].body.en = e.target.value
+        break
+      default:
+        values.questions[qIndex][e.target.name] = e.target.value
+    }
+    setInputFields(values)
+    console.log(inputFields)
+  }
 
-  
-  // const handleAnswerChange =(index,e)=>{
-  //   const values = [...answers]
-  //   switch (e.target.name){
-  //     case 'answer-ar':
-  //       values[index].body.ar = e.target.value
-  //       break
-  //     case 'answer-en':
-  //       values[index].body.en = e.target.value
-  //       break
-  //     default:
-  //       values[index][e.target.name] = e.target.value
-  //   }
-  //   values[index][e.target.name] = e.target.value
-  //   setAnswers(values)
-    
-  // }
-  const handleInputFieldChange =(index,e)=>{
+  const handleAnswerChange =(qIndex,aIndex,e)=>{
+    const values = {...inputFields}
+    switch (e.target.name){
+      case 'answer-ar':
+        values.questions[qIndex].answers[aIndex].body.ar = e.target.value
+        break
+      case 'answer-en':
+        values.questions[qIndex].answers[aIndex].body.en = e.target.value
+        break
+      default:
+        values.questions[qIndex].answers[aIndex][e.target.name] = e.target.value
+    }
+    setInputFields(values)
+    console.log(inputFields)
+  }
+
+
+  const handleInputFieldChange =(e)=>{
     const values = {...inputFields}
     switch (e.target.name){
       case 'title-ar':
@@ -137,6 +138,7 @@ function App() {
         values[e.target.name] = e.target.value
     }
     setInputFields(values)
+    console.log(values)
   }
 
 
@@ -172,7 +174,7 @@ function App() {
               <Label className='mt-2'>Title in Arabic</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input  placeholder='title-ar' type='text' name='title-ar'/>
+              <Input required onChange={e=>{handleInputFieldChange(e)}}  placeholder='title-ar' type='text' name='title-ar'/>
             </Col>
           </Row>
           <Row>
@@ -180,7 +182,7 @@ function App() {
               <Label className='mt-2'>Title in English</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input  placeholder='title-en' type='text' name='title-en'/>
+              <Input required onChange={e=>{handleInputFieldChange(e)}} placeholder='title-en' type='text' name='title-en'/>
             </Col>
           </Row>
           <Row className='my-2'>
@@ -188,15 +190,15 @@ function App() {
               <Label className='mt-2'>Description in Arabic</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input placeholder='description-ar'  type='text'  name='description-ar' />
+              <Input required onChange={e=>{handleInputFieldChange(e)}} placeholder='description-ar'  type='text'  name='description-ar' />
             </Col>
           </Row>
           <Row className='my-2'>
             <Col sm={12} md={1}>
-              <Label className='mt-2'>Description in English</Label>
+              <Label  className='mt-2'>Description in English</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input  placeholder='description-en' type='text' name='description-en'/>
+              <Input required onChange={e=>{handleInputFieldChange(e)}} placeholder='description-en' type='text' name='description-en'/>
             </Col>
           </Row>        
           <Row className='my-2'>
@@ -204,7 +206,7 @@ function App() {
               <Label className='mt-2'>Category</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input placeholder='category' type='text' name='category'  />
+              <Input required onChange={e=>{handleInputFieldChange(e)}} placeholder='category' type='text' name='category'  />
             </Col>
           </Row>
           <Row className='my-2'>
@@ -212,7 +214,7 @@ function App() {
               <Label className='mt-2'>Rules in Arabic</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input   type='textarea' name='rules-ar' placeholder='rules-ar'  />
+              <Input  required onChange={e=>{handleInputFieldChange(e)}} type='textarea' name='rules-ar' placeholder='rules-ar'  />
             </Col>
           </Row>
           <Row className='my-2'>
@@ -220,7 +222,7 @@ function App() {
               <Label className='mt-2'>Rules in English</Label>
             </Col>
             <Col sm={12} md={11}>
-              <Input  type='textarea' name='rules-en' placeholder='rules-en'  />
+              <Input required onChange={e=>{handleInputFieldChange(e)}} type='textarea' name='rules-en' placeholder='rules-en'  />
             </Col>
           </Row>
           {inputFields.questions.map((question,i)=>(  
@@ -230,7 +232,7 @@ function App() {
                 <Label className='mt-2'>Body in Arabic</Label>
               </Col>
               <Col sm={12} md={11}>
-                <Input placeholder='body-ar' type='text' name='body-ar'  />
+                <Input required onChange={e => {handleChangeQuestion(i,e)}} placeholder='body-ar' type='text' name='body-ar'  />
               </Col>
             </Row>
             <Row className='my-2'>
@@ -238,7 +240,7 @@ function App() {
                 <Label className='mt-2'>Body in English</Label>
               </Col>
               <Col sm={12} md={11}>
-                <Input placeholder='body-en' type='text' name='body-en'  />
+                <Input required onChange={e => {handleChangeQuestion(i,e)}} placeholder='body-en' type='text' name='body-en'  />
               </Col>
             </Row>
             <h5>Answer(s) for question no {i+1}</h5>
@@ -250,7 +252,7 @@ function App() {
                       <Label className='mt-2'>Answer in Arabic</Label>
                     </Col>
                     <Col sm={12} md={11}>
-                      <Input placeholder='answer-ar' type='text' name='answer-ar'  />
+                      <Input required onChange={e => {handleAnswerChange(i,j,e)}} placeholder='answer-ar' type='text' name='answer-ar'  />
                     </Col>
                   </Row>
                   <Row className='my-2'>
@@ -258,10 +260,10 @@ function App() {
                       <Label className='mt-2'>Answer in English</Label>
                     </Col>
                     <Col sm={12} md={6}>
-                      <Input  placeholder='answer-en' type='text' name='answer-en'/>
+                      <Input required onChange={e => {handleAnswerChange(i,j,e)}} placeholder='answer-en' type='text' name='answer-en'/>
                     </Col>
                     <Col sm={12} md={5}>
-                      <Input  placeholder='Answer Weight' type='number' name='weight'/>
+                      <Input required onChange={e => {handleAnswerChange(i,j,e)}}  placeholder='Answer Weight' type='number' name='weight'/>
                     </Col>
                   </Row>
                   <Button className='mt-3 mx-2 btn-success' onClick={()=>{addAnswer(i)}} >Add Answer <FaPlus/></Button>
