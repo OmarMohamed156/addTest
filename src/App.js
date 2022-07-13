@@ -17,7 +17,6 @@ function App() {
   const [questions,setQuestions] = useState([
     {
       body:{ar:'',en:''},
-      type:'',
     }
   ])
 
@@ -226,14 +225,14 @@ function App() {
                 <Input onChange={e=>{handleChangeQuestion(i,e)}} placeholder='body-en' type='text' name='body-en'  />
               </Col>
             </Row>
-            <Row className='my-2'>
+            {/* <Row className='my-2'>
               <Col sm={12} md={1}>
                 <Label className='mt-2'>Type</Label>
               </Col>
               <Col sm={12} md={11}>
                 <Input onChange={e=>{handleChangeQuestion(i,e)}} placeholder='type' type='text' name='type' />
               </Col>
-            </Row>
+            </Row> */}
             {answers.map((answer,j)=>(
               <>
                 <div>Answers for the above question</div>
